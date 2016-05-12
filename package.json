@@ -1,7 +1,9 @@
 {
   "name": "testmon",
   "version": "0.1.0",
-  "private": true,
+  "description": "A test monitor.",
+  "repository": "xiaoxinghu/testmon",
+  "license": "MIT",
   "scripts": {
     "start": "DEBUG=server,db nodemon ./bin/testmon.js serve",
     "test": "DEBUG=server,db,test NODE_ENV=test node_modules/mocha/bin/mocha"
