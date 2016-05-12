@@ -6,10 +6,7 @@ var TestSchema = new Schema({
   start: { type: Date, default: Date.now },
   stop: { type: Date, default: Date.now },
   status: String,
-  failure: {
-    message: String,
-    stackTrace: String
-  },
+  error: {},
   meta: {},
 
   _run: { type: String, ref: 'Run' }

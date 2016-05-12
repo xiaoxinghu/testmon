@@ -1,0 +1,9 @@
+before_script:
+  - hostname
+  - node -v
+  - which node
+  - npm install
+
+test:
+  script:
+    - npm test

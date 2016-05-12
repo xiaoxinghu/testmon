@@ -17,7 +17,7 @@ var RunSchema = new Schema({
   },
   tests: [{ type: Schema.Types.ObjectId, ref: 'Test' }],
 
-  _project: { type: String, ref: 'Project' }
+  project: { type: String, ref: 'Project' }
 }, {
   timestamps: true
 });
