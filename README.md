@@ -1,3 +1,9 @@
+## testmon
+
+A test monitor.
+
+[![Build Status](https://travis-ci.org/xiaoxinghu/testmon.svg?branch=master)](https://travis-ci.org/xiaoxinghu/testmon)
+
 ## Usage
 Get the latest [node](https://nodejs.org/) and [mongodb](http://www.mongodb.org) on your machine.
 
