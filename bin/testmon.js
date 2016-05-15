@@ -6,5 +6,6 @@ var pkg = require('../package.json'),
 program
   .version(pkg.version)
   .command('serve', 'start the server')
+  .command('dashboard', 'start the dashboard')
   .command('poc', 'poc')
   .parse(process.argv);
