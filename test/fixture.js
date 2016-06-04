@@ -8,13 +8,19 @@ function Fixture() {
 };
 
 Fixture.prototype.gen = function() {
-  this.projects.push(project.withoutRun.build({_id: 'without run'}));
-  this.projects.push(project.withRuns.build({_id: 'with runs'}));
+  this.projects.push(project.basic.build({_id: 'Basic'}));
   return this;
 };
 
 Fixture.prototype.show = function() {
-  console.log(util.inspect(this.projects, {showHidden: false, depth: null}));
+  console.log(util.inspect(this.stat(), {showHidden: false, depth: null}));
+};
+
+Fixture.prototype.stat = function() {
+  let stat = {
+    projects: this.projects.length
+  };
+  return stat;
 };
 
 var fixture = new Fixture().gen();

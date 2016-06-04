@@ -4,7 +4,7 @@ var exports = module.exports = {},
     table;
 
 exports.mount = grid => {
-  table = grid.set(0, 0, 4, 6, contrib.table, {
+  table = grid.set(0, 0, 12, 4, contrib.table, {
     keys: true
     , fg: 'white'
     , selectedFg: 'white'
@@ -18,16 +18,6 @@ exports.mount = grid => {
     , columnWidth: [6, 6, 6, 6, 6] /*in chars*/ });
 
   table.focus();
-
-  var data = [
-    [1, 2, 3, 4, 5],
-    [1, 2, 3, 4, 5],
-    [1, 2, 3, 4, 5],
-    [1, 2, 3, 4, 5],
-    [1, 2, 3, 4, 5]
-  ];
-
-  exports.setData(data);
 };
 
 exports.setData = data => {

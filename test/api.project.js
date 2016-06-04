@@ -28,7 +28,7 @@ describe('api.project', () => {
         .get(`/api/projects/${project._id}`)
         .expect(200)
         .expect(res => {
-          expect(res.body._id).to.equal(project._id);
+          expect(res.body._id).to.equal(project._id.toLowerCase());
         }).end((err, res) => {
           if (err) throw err;
           done();

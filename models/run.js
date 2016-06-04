@@ -1,25 +1,27 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    plugin = require('./plugin');
 
-var RunSchema = new Schema({
+var transform = (doc, ret, options) => {
+  delete ret.__v;
+  delete ret.createdAt;
+  delete ret.updatedAt;
+};
+
+var Run = new Schema({
   name: String,
-  start: { type: Date, default: Date.now },
-  stop: { type: Date, default: Date.now },
-  status: String,
   meta: {},
-  stats: {
-    suites: { type: Number, default: 0 },
-    tests: { type: Number, default: 0 },
-    passes: { type: Number, default: 0 },
-    failures: { type: Number, default: 0 },
-    breaks: { type: Number, default: 0 },
-    pendings: { type: Number, default: 0 }
-  },
   tests: [{ type: Schema.Types.ObjectId, ref: 'Test' }],
 
   project: { type: String, ref: 'Project' }
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: {
+    transform
+  }
 });
 
-module.exports = mongoose.model('Run', RunSchema);
+Run.plugin(plugin.status);
+Run.plugin(plugin.attachment);
+
+module.exports = mongoose.model('Run', Run);

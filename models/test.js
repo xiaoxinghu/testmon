@@ -1,19 +1,28 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    plugin = require('./plugin');
 
-var TestSchema = new Schema({
+var transform = (doc, ret, options) => {
+  delete ret.__v;
+  delete ret.createdAt;
+  delete ret.updatedAt;
+};
+
+var Test = new Schema({
   title: String,
-  start: { type: Date, default: Date.now },
-  stop: { type: Date, default: Date.now },
-  status: String,
   error: {},
   meta: {},
 
-  _run: { type: String, ref: 'Run' }
+  run: { type: String, ref: 'Run' }
 }, {
-  timestamps: true
+  timestamps: true,
+  discriminatorKey: 'kind',
+  toJSON: {
+    transform
+  }
 });
 
-TestSchema.plugin(require('./plugins/bdd.js'));
+Test.plugin(plugin.status);
+Test.plugin(plugin.attachment);
 
-module.exports = mongoose.model('Test', TestSchema);
+module.exports = mongoose.model('Test', Test);

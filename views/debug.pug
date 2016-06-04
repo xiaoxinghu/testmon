@@ -1,0 +1,11 @@
+extends layout.pug
+
+block content
+  h1= title
+  ul
+    each run in runs
+      li
+        h4= run.name
+        p= run.status
+        p= run.start
+        p= run.stop

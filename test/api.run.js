@@ -1,6 +1,8 @@
 var request = require('supertest'),
+    util = require('util'),
     expect = require('chai').expect,
     app = require('../app').server,
+    fixture = require('./fixture'),
     seed = require('./seed');
 
 describe('api.run', () => {
@@ -10,9 +12,9 @@ describe('api.run', () => {
   describe('GET:/', () => {
 
     it('return list of runs belongs to project', done => {
-      var id = 'with runs';
+      let project = fixture.projects.find(p => p.runs.length > 0);
       request(app)
-        .get(`/api/runs/?project=${id}`)
+        .get(`/api/runs/?project=${project._id}`)
         .expect(200)
         .expect(res => {
           expect(res.body).to.have.length.above(0);
@@ -37,10 +39,10 @@ describe('api.run', () => {
   });
   describe('POST:/', () => {
     it('can create new run', done => {
-      var project = "with runs";
+      var project = fixture.projects[0];
       var run = {
         name: 'newly created',
-        project: 'with runs',
+        project: project._id,
         status: 'running' };
       request(app)
         .post('/api/runs/')
@@ -48,9 +50,10 @@ describe('api.run', () => {
         .expect(200)
         .expect(res => {
           expect(res.body.run.name).to.equal(run.name);
-          expect(res.body.run.project).to.equal(run.project);
+          expect(res.body.run.project).to.equal(run.project.toLowerCase());
           expect(res.body.run.status).to.equal(run.status);
         }).end((err, res) => {
+          console.log('>> error:', res.error.text);
           if (err) throw err;
           done();
         });

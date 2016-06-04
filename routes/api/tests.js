@@ -3,13 +3,13 @@ var router = require('express').Router(),
     models = require('../../models'),
     util = require('util'),
     Run = models.Run,
-    Project = models.Project;
+    Test = models.Test;
 
 var index = (req, res, next) => {
   let q = {};
-  if (req.query.project) q.project = req.query.project.toLowerCase();
-  return Run.find(q).then(runs => {
-    res.json(runs);
+  if (req.query.run) q.run = req.query.run;
+  return Test.find(q).then(tests => {
+    res.json(tests);
   }).catch(err => {
     res.send(err);
   });
@@ -26,7 +26,7 @@ var show = (req, res, next) => {
 var evalCreate = (req, res, next) => {
 
   req.checkBody('name', 'Invalid name').exists();
-  req.checkBody('project', 'invalid project').exists().idExists(Project);
+  req.checkBody('project', 'invalid project').exists().idExists(Run);
 
   req.sanitizeBody('project').trim();
   req.sanitizeBody('project').toLowerCase();
