@@ -1,0 +1,14 @@
+extends layout.pug
+
+block content
+  form(method='POST' action='/api/import', enctype='multipart/form-data')
+    fieldset
+      legend Import Test Results
+      p
+        label(for='project') Project Name:
+          input(type='text', name='project')
+      p
+        label(for='file') File:
+          input(type='file', name='file')
+      p.buttons
+        input(type='submit')

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
+    paginate = require('mongoose-paginate'),
     plugin = require('./plugin');
 
 var transform = (doc, ret, options) => {
@@ -21,6 +22,7 @@ var Run = new Schema({
   }
 });
 
+Run.plugin(paginate);
 Run.plugin(plugin.status);
 Run.plugin(plugin.attachment);
 

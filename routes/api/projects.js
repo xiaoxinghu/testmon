@@ -1,8 +1,7 @@
-var router = require('express').Router();
-var models = require('../../models');
-var util = require('util');
-var Run = models.Run;
-var Project = models.Project;
+var router = require('express').Router(),
+    models = require('../../models'),
+    util = require('util'),
+    Project = models.Project;
 
 var index = (req, res, next) => {
   Project.find({}).then(projects => {

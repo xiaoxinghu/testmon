@@ -5,7 +5,7 @@
   "repository": "xiaoxinghu/testmon",
   "license": "MIT",
   "scripts": {
-    "start": "DEBUG=server,db nodemon ./bin/testmon.js serve",
+    "start": "DEBUG=server,db node_modules/nodemon/bin/nodemon.js ./bin/testmon.js serve",
     "test": "DEBUG=server,db,test NODE_ENV=test node_modules/mocha/bin/mocha"
   },
   "bin": {
@@ -15,15 +15,20 @@
     "blessed": "^0.1.81",
     "blessed-contrib": "^3.5.5",
     "body-parser": "^1.15.0",
+    "chalk": "^1.1.3",
     "commander": "^2.9.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "express-validator": "^2.20.3",
+    "moment": "^2.13.0",
     "mongoose": "^4.4.12",
+    "mongoose-paginate": "^5.0.0",
     "morgan": "^1.7.0",
-    "pug": "^2.0.0-alpha7",
+    "multer": "^1.1.0",
+    "pug": "^2.0.0-beta2",
     "ramda": "^0.21.0",
     "rc": "^1.1.6",
+    "request-promise": "^3.0.0",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
@@ -31,6 +36,7 @@
     "faker": "^3.1.0",
     "mocha": "^2.4.5",
     "mockgoose": "^6.0.2",
+    "nodemon": "^1.9.2",
     "rosie": "^1.3.0",
     "supertest": "^1.2.0"
   }

@@ -31,6 +31,7 @@ var seedTest = (test, runId) => {
     title: test.title,
     start: test.start,
     stop: test.stop,
+    status: test.status,
     run: runId
   }).save();
 };

@@ -49,5 +49,6 @@ router.use(function(req, res, next) {
 });
 
 router.use('/api', require('./api'));
+router.use('/import', require('./import'));
 
 module.exports = router;

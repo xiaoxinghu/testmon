@@ -17,7 +17,7 @@ describe('api.run', () => {
         .get(`/api/runs/?project=${project._id}`)
         .expect(200)
         .expect(res => {
-          expect(res.body).to.have.length.above(0);
+          expect(res.body.docs).to.have.length.above(0);
         }).end((err, res) => {
           if (err) throw err;
           done();
@@ -30,7 +30,7 @@ describe('api.run', () => {
         .get(`/api/runs/?project=${id}`)
         .expect(200)
         .expect(res => {
-          expect(res.body).to.have.length(0);
+          expect(res.body.docs).to.have.length(0);
         }).end((err, res) => {
           if (err) throw err;
           done();
