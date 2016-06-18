@@ -29,23 +29,11 @@ var runSummary = run => {
   });
 };
 
-var projectSummary = project => {
-  return api(`projects/${project}`)
+var summary = () => {
+  return api('runs')
     .then(res => {
-      console.log(chalk.blue.bold(res._id.toUpperCase()));
-      return api(`runs?project=${project}`);
-    }).then(res => {
       return Promise.all((res.docs || []).map(run => {
         return runSummary(run);
-      }));
-    });
-};
-
-var summary = () => {
-  return api('projects')
-    .then(res => {
-      return Promise.all((res || []).map(project => {
-        return projectSummary(project._id);
       }));
     });
 };

@@ -10,7 +10,7 @@ Get the latest [node](https://nodejs.org/) and [mongodb](http://www.mongodb.org)
 To install:
 
 ```bash
-npm install testmon
+npm install -g testmon
 ```
 
 Start the service:
