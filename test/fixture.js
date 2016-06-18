@@ -4,21 +4,21 @@ var factory = require('./factory'),
     run = factory.run;
 
 function Fixture() {
-  this.projects = [];
+  this.runs = [];
 };
 
 Fixture.prototype.gen = function() {
-  this.projects.push(project.basic.build({_id: 'Basic'}));
+  this.runs = this.runs.concat(run.basic.buildList(10));
   return this;
 };
 
 Fixture.prototype.show = function() {
-  console.log(util.inspect(this.stat(), {showHidden: false, depth: null}));
+  console.log(util.inspect(this.runs, {showHidden: false, depth: null}));
 };
 
 Fixture.prototype.stat = function() {
   let stat = {
-    projects: this.projects.length
+    runs: this.runs.length
   };
   return stat;
 };

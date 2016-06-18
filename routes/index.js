@@ -1,14 +1,13 @@
 var express = require('express'),
     util = require('util'),
-    models = require('../models'),
     R = require('ramda'),
+    config = require('../utils/config'),
+    models = require('../models'),
     router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  models.Project.find({}).then(projects => {
-    res.render('index', { projects });
-  });
+  res.render('index', { ui: config.ui });
 });
 
 var countProject = stats => {

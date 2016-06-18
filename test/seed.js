@@ -4,21 +4,13 @@ var factory = require('./factory'),
     Models = require('../models'),
     fixture = require('./fixture');
 
-var seedProject = project => {
-  return new Models.Project({ _id: project._id, meta: project.meta })
-    .save().then(p => {
-      return Promise.all((project.runs || []).map(run => {
-        return seedRun(run, p._id);
-      }));
-    });
-};
-
-var seedRun = (run, projectId) => {
+var seedRun = run => {
   return new Models.Run({
     name: run.name,
     start: run.start,
     stop: run.stop,
-    project: projectId
+    tags: run.tags || [],
+    meta: run.meta || {}
   }).save().then(r => {
     return Promise.all((run.tests || []).map(test => {
       return seedTest(test, r._id);
@@ -39,8 +31,8 @@ var seedTest = (test, runId) => {
 
 function seed() {
   return Promise.all(
-    fixture.projects.map(project => {
-      return seedProject(project);
+    fixture.runs.map(run => {
+      return seedRun(run);
     }));
 };
 

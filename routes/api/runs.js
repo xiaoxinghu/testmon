@@ -56,7 +56,6 @@ var stats = (req, res, next) => {
 var evalCreate = (req, res, next) => {
 
   req.checkBody('name', 'Invalid name').exists();
-  req.checkBody('project', 'invalid project').exists().idExists(Project);
 
   req.sanitizeBody('project').trim();
   req.sanitizeBody('project').toLowerCase();

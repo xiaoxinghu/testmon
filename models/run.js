@@ -12,9 +12,8 @@ var transform = (doc, ret, options) => {
 var Run = new Schema({
   name: String,
   meta: {},
-  tests: [{ type: Schema.Types.ObjectId, ref: 'Test' }],
-
-  project: { type: String, ref: 'Project' }
+  tags: [String],
+  tests: [{ type: Schema.Types.ObjectId, ref: 'Test' }]
 }, {
   timestamps: true,
   toJSON: {

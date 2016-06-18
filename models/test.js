@@ -12,6 +12,7 @@ var Test = new Schema({
   title: String,
   error: {},
   meta: {},
+  tags: [String],
 
   run: { type: String, ref: 'Run' }
 }, {

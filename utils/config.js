@@ -3,6 +3,7 @@ var config = require('rc')('testmon', {
     uri: 'mongodb://localhost/',
     name: 'testmon'
   },
+  ui: 'testmon-face.js',
   remote: 'localhost',
   port: 3000
 });

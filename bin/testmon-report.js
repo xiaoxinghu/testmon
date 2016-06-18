@@ -20,14 +20,12 @@ var api = path => {
 
 var runSummary = run => {
   return api(`runs/${run._id}/stats`).then(res => {
-    console.log('  ---------------------------------------');
-    // let stop = moment(run.stop);
-    // let start = moment(run.start);
-    // let duration = stop.diff(start, 'seconds');
-    console.log(`  ${chalk.gray(run.start)} ${run.name}`);
-    for (var status in res) {
-      console.log(style[status](`    ${res[status]}\t${status}`));
-    }
+    // console.log('  ---------------------------------------');
+    console.log(`  ----- ${chalk.gray(run.start)} ${run.name}`);
+    console.log.apply(this, Object.keys(res).map(status => style[status](`    ${res[status]}\t${status}`)));
+    // for (var status in res) {
+    //   console.log(style[status](`    ${res[status]}\t${status}`));
+    // }
   });
 };
 
