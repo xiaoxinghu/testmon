@@ -8,7 +8,7 @@ var router = require('express').Router(),
 
 var index = (req, res, next) => {
   let q = {};
-  if(req.query.project) q.project = req.query.project.toLowerCase();
+  if (req.query.q) console.log(req.query.q)
   let option = {
     page: req.query.page || 1,
     limit: req.query.limit || 10,
