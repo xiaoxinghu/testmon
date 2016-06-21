@@ -2,7 +2,12 @@ var rp = require('request-promise'),
     chalk = require('chalk'),
     moment = require('moment'),
     util = require('util'),
-    config = require('../utils/config');
+    program = require('commander'),
+    config = require('../utils/config')
+
+program
+  .option('-q, --query [filter]', 'report filter')
+  .parse(process.argv)
 
 const style = {
   passed: chalk.green,
@@ -30,7 +35,9 @@ var runSummary = run => {
 };
 
 var summary = () => {
-  return api('runs')
+  let url = 'runs'
+  if(program.query) url = `${url}?q=${program.query}`
+  return api(url)
     .then(res => {
       return Promise.all((res.docs || []).map(run => {
         return runSummary(run);
@@ -42,4 +49,3 @@ summary()
   .catch(err => {
     console.log(err.message);
   });
-

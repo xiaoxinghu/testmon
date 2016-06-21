@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var pkg = require('../package.json'),
-    program = require('commander');
+    program = require('commander')
 
 program
   .version(pkg.version)
@@ -9,4 +9,4 @@ program
   .command('report', 'print the report')
   .command('dashboard', 'start the dashboard')
   .command('poc', 'poc')
-  .parse(process.argv);
+  .parse(process.argv)

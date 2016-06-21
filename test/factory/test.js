@@ -5,7 +5,7 @@ var names = ['debug', 'regression', 'nightly'];
 var status = ['passed', 'failed', 'broken', 'pending'];
 
 var basic = new Factory()
-      .attr('title', () => `${faker.hacker.noun()} ${faker.hacker.verb()} ${faker.hacker.noun()}`)
+      .attr('name', () => `${faker.hacker.noun()} ${faker.hacker.verb()} ${faker.hacker.noun()}`)
       .attr('status', () => faker.random.arrayElement(status))
       .attr('start', () => faker.date.recent())
       .attr('stop', ['start'], start => {

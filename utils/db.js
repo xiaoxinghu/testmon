@@ -7,7 +7,7 @@ var exports = module.exports = {},
 mongoose.Promise = global.Promise;
 var _connection;
 
-exports.connect = () => {
+var connect = () => {
   var db = config.db;
   // if (process.env.NODE_ENV == 'test') {
   //   db += '-test';
@@ -17,5 +17,17 @@ exports.connect = () => {
   });
 };
 
-exports.close = () => {
+var close = () => {
+  return mongoose.disconnect()
 };
+
+/*
+Quick Connect, disconnect at the end of cb
+*/
+var qc = cb => {
+  return connect().then(cb).then(close)
+}
+
+exports.connect = connect
+exports.close = close
+exports.qc = qc

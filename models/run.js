@@ -1,16 +1,16 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     paginate = require('mongoose-paginate'),
-    plugin = require('./plugin');
+    plugin = require('./plugin')
 
 var transform = (doc, ret, options) => {
-  delete ret.__v;
-  delete ret.createdAt;
-  delete ret.updatedAt;
-};
+  delete ret.__v
+  delete ret.createdAt
+  delete ret.updatedAt
+}
 
 var Run = new Schema({
-  name: String,
+  name: { type: String, required: true },
   meta: {},
   tags: [String],
   tests: [{ type: Schema.Types.ObjectId, ref: 'Test' }]
@@ -19,10 +19,10 @@ var Run = new Schema({
   toJSON: {
     transform
   }
-});
+})
 
-Run.plugin(paginate);
-Run.plugin(plugin.status);
-Run.plugin(plugin.attachment);
+Run.plugin(paginate)
+Run.plugin(plugin.status)
+Run.plugin(plugin.attachment)
 
-module.exports = mongoose.model('Run', Run);
+module.exports = mongoose.model('Run', Run)
