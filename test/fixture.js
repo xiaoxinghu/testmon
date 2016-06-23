@@ -8,7 +8,7 @@ function Fixture() {
 };
 
 Fixture.prototype.gen = function() {
-  this.runs = this.runs.concat(run.basic.buildList(10));
+  this.runs = this.runs.concat(run.grouped.buildList(5));
   return this;
 };
 

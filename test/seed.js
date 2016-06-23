@@ -11,7 +11,7 @@ var seedRun = run => {
     run: R.omit(['tests'], run),
     tests: run.tests
   }
-  return utils.import(data)
+  return utils.eater.eat(run)
 }
 
 function seed() {
@@ -21,9 +21,9 @@ function seed() {
     }))
 }
 
-module.exports = () => {
-  return mockgoose.reset(() => {
-    return seed()
+module.exports = done => {
+  mockgoose.reset(() => {
+    seed().then(done)
   })
 }
 
@@ -31,12 +31,9 @@ module.exports = () => {
  If run directly, this script will populate data.
 */
 if (!module.parent) {
-  var utils = require('../utils')
   utils.db.qc(() => {
     return mongoose.connection.db.dropDatabase()
-    .then(() => {
-      return seed()
-    })
+    .then(seed)
   }).catch(err => {
     console.log(err)
     process.exit(-1)

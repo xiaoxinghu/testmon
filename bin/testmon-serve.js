@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-var app = require('../app');
-app.serve();
+var app = require('..')
+app.serve()

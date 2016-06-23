@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    plugin = require('./plugin')
+Schema = mongoose.Schema,
+plugin = require('./plugin')
 
 var transform = (doc, ret, options) => {
   delete ret.__v
@@ -10,11 +10,12 @@ var transform = (doc, ret, options) => {
 
 var Test = new Schema({
   name: { type: String, required: true },
-  path: { type: [String], default: [] },
-  error: {},
+  status: { type: String, default: 'unknown' },
+  start: Date,
+  stop: Date,
+  time: Number,
   meta: {},
   tags: { type: [String], default: [] },
-  run: { type: String, ref: 'Run', required: true }
 }, {
   timestamps: true,
   discriminatorKey: 'kind',
@@ -23,7 +24,13 @@ var Test = new Schema({
   }
 })
 
-Test.plugin(plugin.status)
 Test.plugin(plugin.attachment)
+
+var autoPopulate = function(next) {
+  this.populate('tests')
+  next()
+}
+
+Test.pre('findOne', autoPopulate)
 
 module.exports = mongoose.model('Test', Test)

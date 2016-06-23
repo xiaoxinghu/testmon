@@ -1,7 +1,7 @@
 var request = require('supertest'),
     util = require('util'),
     expect = require('chai').expect,
-    app = require('../app').server,
+    app = require('../server'),
     fixture = require('./fixture'),
     seed = require('./seed');
 

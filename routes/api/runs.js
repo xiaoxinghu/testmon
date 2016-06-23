@@ -14,7 +14,7 @@ var index = (req, res, next) => {
   let option = {
     page: req.query.page || 1,
     limit: req.query.limit || 10,
-    sort: { start: -1 }
+    sort: { updatedAt: -1 }
   }
   return Run.paginate(q, option).then(runs => {
     res.json(runs)

@@ -3,7 +3,7 @@ var router = require('express').Router(),
     models = require('../../models'),
     util = require('util'),
     Run = models.Run,
-    Test = models.Test;
+    Test = models.Test
 
 var index = (req, res, next) => {
   let q = {};
@@ -15,9 +15,30 @@ var index = (req, res, next) => {
   });
 };
 
+var autoPopulate = test => {
+  if (test.kind === 'Suite') {
+    return test.populate('tests').exec((err, test) => {
+      return Promise.all(( test.tests || [] ).map(t => {
+        return autoPopulate(t)
+      }))
+    })
+  }
+  return test
+}
+
 var show = (req, res, next) => {
-  return Run.findById(req.params.id).then(run => {
-    res.json(run);
+  // return Test.findById(req.params.id).populate('tests').exec(( err, run ) => {
+  //   res.json(run);
+  // }).catch(err => {
+  //   res.send(err.message);
+  // });
+  // return Test.findOne({ _id: req.params.id }).then(autoPopulate).then(test => {
+  //   res.json(test);
+  // }).catch(err => {
+  //   res.send(err.message);
+  // });
+  return Test.findOne({ _id: req.params.id }).then(test => {
+    res.json(test);
   }).catch(err => {
     res.send(err.message);
   });
