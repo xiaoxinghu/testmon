@@ -27,10 +27,6 @@ describe('importer', () => {
     })
   })
 
-  it('can import junit results', () => {
-    return importer.import(__dirname + '/sample/junit.xml', 'junit').then(() => console.log('done'))
-  })
-
   it('reject test without name')
   it('reject test with wrong type of properties')
   it('warning test cases without time info')

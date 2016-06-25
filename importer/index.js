@@ -4,7 +4,6 @@ var R = require('ramda')
 , exports = module.exports = {}
 
 var eval = data => {
-  console.log('data', data)
   return new Promise((resolve, reject) => {
     if (typeof data.name !== 'string') reject('cannot find run name within data')
     // if (!Array.isArray(data.tests)) reject('cannot find tests within data')
