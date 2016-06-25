@@ -1,4 +1,4 @@
-var q = require('../utils/q')
+var q = require.main.require('utils').q
 var expect = require('chai').expect
 
 describe('utils.q', () => {

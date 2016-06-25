@@ -1,6 +1,6 @@
-var mongoose = require('mongoose'),
-Schema = mongoose.Schema,
-plugin = require('./plugin')
+var mongoose = require('mongoose')
+, Schema = mongoose.Schema
+, plugin = require('./plugin')
 
 var transform = (doc, ret, options) => {
   delete ret.__v
@@ -15,7 +15,7 @@ var Test = new Schema({
   stop: Date,
   time: Number,
   meta: {},
-  tags: { type: [String], default: [] },
+  tags: { type: [String], default: [] }
 }, {
   timestamps: true,
   discriminatorKey: 'kind',

@@ -31,7 +31,8 @@
     "ramda": "^0.21.0",
     "rc": "^1.1.6",
     "request-promise": "^3.0.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "xml2js": "^0.4.16"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -1,2 +1,2 @@
-var dashboard = require('../dashboard');
+var dashboard = require.main.require('dashboard');
 dashboard.render();

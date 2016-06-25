@@ -1,9 +1,9 @@
-var router = require('express').Router(),
-    debug = require('debug')('server'),
-    models = require('../../models'),
-    util = require('util'),
-    Run = models.Run,
-    Test = models.Test
+var router = require('express').Router()
+, debug = require('debug')('server')
+, models = require.main.require('models')
+, util = require('util')
+, Run = models.Run
+, Test = models.Test
 
 var index = (req, res, next) => {
   let q = {};

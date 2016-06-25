@@ -15,3 +15,4 @@ app.shutdown = () => {
 }
 
 app.taste = utils.eater.taste
+app.eat = utils.eater.eat

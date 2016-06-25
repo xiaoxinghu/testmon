@@ -1,9 +1,10 @@
-var eater = require.main.require('utils').eater
+var importer = require.main.require('importer')
 , Models = require.main.require('models')
+, readFileP = require.main.require('utils').readFileP
 , expect = require('chai').expect
 
-describe('utils.eater', () => {
-  it('can eat legit data', () => {
+describe('importer', () => {
+  it('can import legit data', () => {
     let runName = 'imported run'
     let testNames = ['imported test 1', 'imported test 2']
 
@@ -13,7 +14,7 @@ describe('utils.eater', () => {
         name: n
       }))
     }
-    return eater.eat(data).then(() => {
+    return importer.import(data).then(() => {
       return Models.Run
         .findOne({
           name: runName
@@ -24,6 +25,10 @@ describe('utils.eater', () => {
           expect(run.tests.map(r => r.name)).to.have.members(testNames)
         })
     })
+  })
+
+  it('can import junit results', () => {
+    return importer.import(__dirname + '/sample/junit.xml', 'junit').then(() => console.log('done'))
   })
 
   it('reject test without name')
