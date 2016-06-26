@@ -1,5 +1,5 @@
-var eater = require.main.require('utils').eater
-, Models = require.main.require('models')
+var eater = require('../utils').eater
+, Models = require('../models')
 , expect = require('chai').expect
 
 describe('utils.eater', () => {

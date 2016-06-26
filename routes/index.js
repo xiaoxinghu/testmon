@@ -1,8 +1,8 @@
 var express = require('express')
 , util = require('util')
 , R = require('ramda')
-, config = require.main.require('utils').config
-, models = require.main.require('models')
+, config = require('../utils').config
+, models = require('../models')
 , router = express.Router()
 
 /* GET home page. */

@@ -1,5 +1,6 @@
 var utils = require('./utils')
-var server = require('./server')
+, server = require('./server')
+, importer = require('./importer')
 
 var app = module.exports = {};
 
@@ -14,5 +15,7 @@ app.shutdown = () => {
   return server.close()
 }
 
+app.config = utils.config
+app.import = importer.import
 app.taste = utils.eater.taste
 app.eat = utils.eater.eat

@@ -3,7 +3,7 @@ var rp = require('request-promise')
 , moment = require('moment')
 , util = require('util')
 , program = require('commander')
-, config = require.main.require('utils/config')
+, config = require('../utils').config
 
 program
   .option('-q, --query [filter]', 'report filter')

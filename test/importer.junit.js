@@ -1,4 +1,4 @@
-var junit = require.main.require('importer/junit')
+var junit = require('../importer/junit')
 , util = require('util')
 , expect = require('chai').expect
 

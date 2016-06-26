@@ -1,6 +1,6 @@
 var R = require('ramda')
-, models = require.main.require('models')
-, config = require.main.require('utils').config
+, models = require('../models')
+, config = require('../utils').config
 , exports = module.exports = {}
 
 var eval = data => {
@@ -29,9 +29,15 @@ var save = data => {
   return process(data, true)
 }
 
+var parsers = {
+  junit: require('./junit')
+}
+
 var init = (data, name, type) => {
-  if (!type) return new Promise((resolve, reject) => resolve(data))
-  return require('./junit')(data, name)
+  if (!type) return data
+  let parse = parsers[type]
+  if (!parse) return new Promise((_, reject) => reject(`${type} is not supported yet.`))
+  return parse(data, name)
 }
 
 exports.eval = eval

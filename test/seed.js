@@ -2,7 +2,7 @@ var factory = require('./factory')
 , mongoose = require('mongoose')
 , mockgoose = require('mockgoose')
 , R = require('ramda')
-, utils = require.main.require('utils')
+, utils = require('../utils')
 , fixture = require('./fixture')
 
 var seedRun = run => {

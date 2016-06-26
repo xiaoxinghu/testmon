@@ -2,7 +2,7 @@ var app = require('..')
 , mongoose = require('mongoose')
 , mockgoose = require('mockgoose')
 , debug = require('debug')('test')
-, utils = require.main.require('utils')
+, utils = require('../utils')
 , seed = require('./seed')
 
 before(() => {

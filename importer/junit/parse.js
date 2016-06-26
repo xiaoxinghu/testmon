@@ -2,7 +2,7 @@
 
 var R = require('ramda')
 , util = require('util')
-, rename = require.main.require('utils').rename
+, rename = require('../../utils').rename
 , ps = require('xml2js').parseString
 
 var toObj = xml => {
@@ -11,21 +11,30 @@ var toObj = xml => {
       if (err) reject(err)
       resolve(obj)
     })
-  })
+  })}
+
+var sanitize = (v, k, o) => {
+  if (k == 'time' && isNaN(v))
+    return Number(v)
+  if (( k == 'start' || k == 'stop' )
+      && !( v instanceof Date ))
+    return Date.parse(v)
+  return v
 }
 
 var processAttr = R.pipe(
   R.pathOr({}, ['$']),
   R.pick(['name', 'time', 'timestamp']),
-  rename('timestamp')('time'))
+  rename('timestamp')('start'),
+  R.mapObjIndexed(sanitize)
+)
 
 var processProps = R.pipe(
   R.pathOr([], ['properties']),
   R.pluck('property'),
   R.flatten,
-  R.pluck('$'),
-  R.map(p => ( [ p.name, p.value ] )),
-  R.fromPairs)
+  R.pluck('$')
+)
 
 var process = R.curry((parent, obj) => {
   let attr = obj.$
@@ -39,13 +48,14 @@ var process = R.curry((parent, obj) => {
 })
 
 var show = obj => {
-  console.log('>>>>> obj', util.inspect(obj, {
+  console.log('>>>>> obj\n', util.inspect(obj, {
     showHidden: false,
     depth: null
   }))
+  return obj
 }
 
-var parse = R.pipeP(toObj, process({name: 'root'}))
-// var parse = R.pipeP(toObj, process({name: 'root'}), show)
+var parse = R.pipeP(toObj, process({}))
+// var parse = R.pipeP(toObj, process({}), show)
 
 module.exports = parse

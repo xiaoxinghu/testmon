@@ -1,5 +1,5 @@
 var R = require('ramda')
-, models = require.main.require('models')
+, models = require('../models')
 , exports = module.exports = {}
 
 var taste = data => {

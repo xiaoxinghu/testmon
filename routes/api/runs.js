@@ -1,8 +1,8 @@
 var router = require('express').Router()
 , debug = require('debug')('server')
-, models = require.main.require('models')
+, models = require('../../models')
 , util = require('util')
-, utils = require.main.require('utils')
+, utils = require('../../utils')
 , Run = models.Run
 , Test = models.Test
 
