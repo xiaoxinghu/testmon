@@ -23,7 +23,7 @@ describe('api.run', () => {
         })
     })
 
-    it('can filter runs by tag', done => {
+    it.skip('can filter runs by tag', done => {
       let tag = 'iPhone'
       let q = `tag:${tag}`
       request(app)
@@ -35,7 +35,6 @@ describe('api.run', () => {
           if (err) throw err
           done()
         })
-
     })
 
     it('can filter runs by multiple tags')

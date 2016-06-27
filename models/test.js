@@ -13,7 +13,7 @@ var Test = new Schema({
   status: { type: String, default: 'unknown' },
   start: Date,
   stop: Date,
-  time: Number,
+  duration: Number,
   meta: {},
   tags: { type: [String], default: [] }
 }, {

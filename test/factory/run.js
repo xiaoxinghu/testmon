@@ -22,12 +22,18 @@ var base = new Factory()
           project: faker.random.arrayElement(projects) } })
 
 
-var basic = new Factory().extend(base).attr('tests', () => {
-  return test.basic.buildList(faker.random.number(10))
-})
-var grouped = new Factory().extend(base).attr('tests', () => {
-  return suite.basic.buildList(faker.random.number(5))
-})
+var basic = new Factory()
+      .extend(base)
+      .option('numTests', 10)
+      .attr('tests', ['numTests'], numTests => {
+        return test.basic.buildList(numTests)
+      })
+var grouped = new Factory()
+      .extend(base)
+      .option('numSuites', 4)
+      .attr('tests', ['numSuites'], numSuites => {
+        return suite.basic.buildList(numSuites)
+      })
 
 module.exports = {
   basic,

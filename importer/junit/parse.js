@@ -14,7 +14,7 @@ var toObj = xml => {
   })}
 
 var sanitize = (v, k, o) => {
-  if (k == 'time' && isNaN(v))
+  if (k == 'duration' && isNaN(v))
     return Number(v)
   if (( k == 'start' || k == 'stop' )
       && !( v instanceof Date ))
@@ -26,6 +26,7 @@ var processAttr = R.pipe(
   R.pathOr({}, ['$']),
   R.pick(['name', 'time', 'timestamp']),
   rename('timestamp')('start'),
+  rename('time')('duration'),
   R.mapObjIndexed(sanitize)
 )
 

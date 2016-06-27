@@ -17,5 +17,3 @@ app.shutdown = () => {
 
 app.config = utils.config
 app.import = importer.import
-app.taste = utils.eater.taste
-app.eat = utils.eater.eat

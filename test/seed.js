@@ -1,23 +1,12 @@
-var factory = require('./factory')
-, mongoose = require('mongoose')
+var mongoose = require('mongoose')
 , mockgoose = require('mockgoose')
 , R = require('ramda')
-, utils = require('../utils')
+, db = require('../utils').db
+, importer = require('../importer')
 , fixture = require('./fixture')
 
-var seedRun = run => {
-  let data = {
-    run: R.omit(['tests'], run),
-    tests: run.tests
-  }
-  return utils.eater.eat(run)
-}
-
 function seed() {
-  return Promise.all(
-    fixture.runs.map(run => {
-      return seedRun(run)
-    }))
+  return Promise.all(R.map(importer.import, fixture.runs)).catch(console.log)
 }
 
 module.exports = () => {
@@ -32,7 +21,7 @@ module.exports = () => {
  If run directly, this script will populate data.
  */
 if (!module.parent) {
-  utils.db.qc(() => {
+  db.qc(() => {
     return mongoose.connection.db.dropDatabase()
       .then(seed)
   }).catch(err => {

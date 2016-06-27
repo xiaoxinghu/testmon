@@ -13,9 +13,12 @@ var base = new Factory()
         return d
       })
 
-var basic = new Factory().extend(base).attr('tests', () => {
-  return test.basic.buildList(faker.random.number(10))
-})
+var basic = new Factory()
+      .extend(base)
+      .option('numTests', 10)
+      .attr('tests', ['numTests'], numTests => {
+        return test.basic.buildList(numTests)
+      })
 
 module.exports = {
   basic

@@ -1,15 +1,8 @@
 var R = require('ramda')
 , models = require('../models')
 , config = require('../utils').config
+, eval = require('./eval')
 , exports = module.exports = {}
-
-var eval = data => {
-  return new Promise((resolve, reject) => {
-    if (typeof data.name !== 'string') reject('cannot find run name within data')
-    // if (!Array.isArray(data.tests)) reject('cannot find tests within data')
-    resolve(data)
-  })
-}
 
 var process = ( data, root ) => {
   if (!data.tests && !root) {
@@ -26,7 +19,9 @@ var process = ( data, root ) => {
 }
 
 var save = data => {
-  return process(data, true)
+  let d = data.evaluated ? data.data : data
+  // return process(d, true).then(() => Promise.reslove(data.report || data))
+  return process(d, true)
 }
 
 var parsers = {
@@ -34,12 +29,11 @@ var parsers = {
 }
 
 var init = (data, name, type) => {
-  if (!type) return data
+  if (!type) return Promise.resolve(data)
   let parse = parsers[type]
-  if (!parse) return new Promise((_, reject) => reject(`${type} is not supported yet.`))
+  if (!parse) return Promise.reject(`${type} is not supported yet.`)
   return parse(data, name)
 }
 
 exports.eval = eval
 exports.import = R.pipeP(init, eval, save)
-exports.poc = R.pipeP(init)
