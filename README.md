@@ -66,10 +66,10 @@ testmon config follows config file (rc file) convention. Places that tesmon will
 Default value (yeah, it's JSON):
 
 ```JSON
-{ db: { uri: 'mongodb://localhost/', name: 'testmon' },
-  ui: 'testmon-face.js',
-  remote: 'localhost',
-  port: 3000 }
+{ "db": { "uri": "mongodb://localhost/", "name": "testmon" },
+  "ui": "testmon-face.js",
+  "remote": "localhost",
+  "port": 3000 }
 ```
 
 | key | meaning |
